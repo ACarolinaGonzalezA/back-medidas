@@ -43,13 +43,15 @@ app.post('/api/buenas_practicas', async (req, res) => {
     // Guarda en la DB
     await pool.query(
       `INSERT INTO buenas_practicas (
-        nombre_completo, vereda, organizaciones, otra_organizacion,
+        nombre_completo, familia, vereda, otra_vereda, organizaciones, otra_organizacion,
         correo_electronico, numero_celular, nombre_practica,
         problema, descripcion
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9, $10, $11)`,
       [
         nombre_completo,
+        familia,
         vereda,
+        otra_vereda,
         organizaciones,
         otra_organizacion,
         correo_electronico,
