@@ -29,14 +29,17 @@ const transporter = nodemailer.createTransport({
 app.post('/api/buenas_practicas', async (req, res) => {
   const {
     nombre_completo,
+    familia,
     vereda,
+    otra_vereda,
     organizaciones,
     otra_organizacion,
     correo_electronico,
     numero_celular,
     nombre_practica,
     problema,
-    descripcion
+    descripcion,
+    redes,
   } = req.body;
 
   try {
@@ -45,8 +48,8 @@ app.post('/api/buenas_practicas', async (req, res) => {
       `INSERT INTO buenas_practicas (
         nombre_completo, familia, vereda, otra_vereda, organizaciones, otra_organizacion,
         correo_electronico, numero_celular, nombre_practica,
-        problema, descripcion
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9, $10, $11)`,
+        problema, descripcion, redes
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
       [
         nombre_completo,
         familia,
@@ -58,7 +61,8 @@ app.post('/api/buenas_practicas', async (req, res) => {
         numero_celular,
         nombre_practica,
         problema,
-        descripcion
+        descripcion,
+        redes
       ]
     );
 
@@ -67,8 +71,16 @@ app.post('/api/buenas_practicas', async (req, res) => {
     const mailOptions = {
       from: process.env.GMAIL_USER,
       to: correo_electronico,
-      subject: 'Confirmación de recepción de tu formulario',
-      text: `Hola ${nombre_completo},\n\nGracias por enviar tu buena práctica.\nPronto estaremos revisando tu aporte.\n\n¡Saludos!`
+      subject: '¡Hurra! Hemos recibido tu buena práctica para la Feria de las Flores 🎉',
+      text: `Hola ${nombre_completo},
+  ¡Gracias por enviar tu buena práctica de salvaguardia para implementar durante la Feria de las Flores!
+  Tu aporte es muy valioso para mantener viva nuestra cultura silletera. 
+  Recuerda enviar tus evidencias (fotos o videos) a este mismo correo. Es importante que en ellas sea visible la fecha en que realizaste cada actividad.
+
+  También puedes etiquetarnos en Instagram para compartir tu compromiso con más personas:
+  👉 https://instagram.com/patrimoniomde
+
+  ¡Gracias por ser parte activa de la salvaguardia de la cultura silletera!`
     };
 
     await transporter.sendMail(mailOptions);
@@ -82,14 +94,14 @@ app.post('/api/buenas_practicas', async (req, res) => {
 
 // Ruta GET para obtener todas las buenas_practicas
 app.get('/api/buenas_practicas', async (req, res) => {
-    try {
-      const result = await pool.query('SELECT * FROM buenas_practicas ORDER BY id DESC');
-      res.json(result.rows);
-    } catch (err) {
-      console.error('Error consultando compromisos:', err);
-      res.status(500).send('Error al obtener compromisos.');
-    }
-  });
+  try {
+    const result = await pool.query('SELECT * FROM buenas_practicas ORDER BY id DESC');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error consultando compromisos:', err);
+    res.status(500).send('Error al obtener compromisos.');
+  }
+});
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
