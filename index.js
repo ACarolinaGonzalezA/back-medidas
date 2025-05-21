@@ -12,8 +12,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+console.log("🔍 DATABASE:", process.env.DATABASE);
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE,
   ssl: { rejectUnauthorized: false }
 });
 
@@ -71,7 +73,7 @@ app.post('/api/buenas_practicas', async (req, res) => {
     const mailOptions = {
       from: process.env.GMAIL_USER,
       to: correo_electronico,
-      subject: '¡Hurra! Hemos recibido tu buena práctica para la Feria de las Flores 🎉',
+      subject: '¡Hurra! Hemos recibido tu buena práctica de salvaguardia 🎉',
       text: `Hola ${nombre_completo},
   ¡Gracias por enviar tu buena práctica de salvaguardia para implementar durante la Feria de las Flores!
   Tu aporte es muy valioso para mantener viva nuestra cultura silletera. 
