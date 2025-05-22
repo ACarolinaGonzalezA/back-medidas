@@ -12,10 +12,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-console.log("🔍 DATABASE_URL:", process.env.DATABASE_URL);
+console.log("🔍 PGDATABASE:", process.env.PGDATABASE);
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.PGDATABASE,
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 });
 
