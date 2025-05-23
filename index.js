@@ -47,14 +47,14 @@ app.post('/api/buenas_practicas', async (req, res) => {
    // Validaciones de longitud
    const maxLength = {
     nombre_completo: 100,
-    familia: 100,
+    familia: 50,
     vereda: 100,
     otra_vereda: 100,
     organizaciones: 50,
     otra_organizacion: 100,
     correo_electronico: 100,
     numero_celular: 10,
-    nombre_practica: 100,
+    nombre_practica: 50,
     problema: 120,
     descripcion: 350,
     redes: 100,
