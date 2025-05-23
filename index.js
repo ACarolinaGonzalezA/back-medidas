@@ -44,6 +44,34 @@ app.post('/api/buenas_practicas', async (req, res) => {
     redes,
   } = req.body;
 
+   // Validaciones de longitud
+   const maxLength = {
+    nombre_completo: 100,
+    familia: 100,
+    vereda: 100,
+    otra_vereda: 100,
+    organizaciones: 50,
+    otra_organizacion: 100,
+    correo_electronico: 100,
+    numero_celular: 10,
+    nombre_practica: 100,
+    problema: 120,
+    descripcion: 350,
+    redes: 100,
+  };
+
+  for (const [campo, valor] of Object.entries(req.body)) {
+    if (valor && valor.length > maxLength[campo]) {
+      return res.status(400).json({ error: `El campo "${campo}" excede el máximo de ${maxLength[campo]} caracteres.` });
+    }
+  }
+
+  // Validación adicional: celular debe tener exactamente 10 dígitos
+  if (!/^\d{10}$/.test(numero_celular)) {
+    return res.status(400).json({ error: 'El número de celular debe tener exactamente 10 dígitos.' });
+  }
+
+
   try {
     // Guarda en la DB
     await pool.query(
