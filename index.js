@@ -49,7 +49,7 @@ app.post('/api/buenas_practicas', async (req, res) => {
     nombre_completo: 100,
     familia: 50,
     vereda: 100,
-    otra_vereda: 100,
+    otra_vereda: 50,
     organizaciones: 50,
     otra_organizacion: 100,
     correo_electronico: 100,
