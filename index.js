@@ -108,7 +108,7 @@ app.post('/api/buenas_practicas', async (req, res) => {
   Recuerda enviar tus evidencias (fotos o videos) a este mismo correo. Es importante que en ellas sea visible la fecha en que realizaste cada actividad.
 
   También puedes etiquetarnos en Instagram para compartir tu compromiso con más personas:
-  👉 https://instagram.com/patrimoniomde
+  👉 https://www.instagram.com/cultura.med/
 
   ¡Gracias por ser parte activa de la salvaguardia de la cultura silletera!`
     };
