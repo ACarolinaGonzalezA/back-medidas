@@ -19,6 +19,7 @@ const pool = new Pool({
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 });
 
+
 // Configura Nodemailer con Gmail
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -133,7 +134,10 @@ app.get('/api/buenas_practicas', async (req, res) => {
     res.status(500).send('Error al obtener compromisos.');
   }
 });
-
+// Ruta de prueba para verificar que el servidor funciona
+app.get("/", (req, res) => {
+  res.send("✅ Backend Silleta corriendo!");
+});
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
