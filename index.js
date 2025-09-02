@@ -26,7 +26,10 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_PASS,
-  }
+  },
+  connectionTimeout: 10000, // 10 segundos
+  greetingTimeout: 10000,
+  socketTimeout: 10000
 });
 
 app.post('/api/buenas_practicas', async (req, res) => {
@@ -134,10 +137,7 @@ app.get('/api/buenas_practicas', async (req, res) => {
     res.status(500).send('Error al obtener compromisos.');
   }
 });
-// Ruta de prueba para verificar que el servidor funciona
-app.get("/", (req, res) => {
-  res.send("✅ Backend Silleta corriendo!");
-});
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
