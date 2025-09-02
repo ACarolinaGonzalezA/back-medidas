@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import pkg from 'pg';
 import dotenv from 'dotenv';
-import nodemailer from 'nodemailer';
+//import nodemailer from 'nodemailer';
 
 dotenv.config();
 
@@ -21,7 +21,7 @@ const pool = new Pool({
 
 
 // Configura Nodemailer con Gmail
-const transporter = nodemailer.createTransport({
+/*const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.GMAIL_USER,
@@ -30,7 +30,7 @@ const transporter = nodemailer.createTransport({
   connectionTimeout: 10000, // 10 segundos
   greetingTimeout: 10000,
   socketTimeout: 10000
-});
+});*/
 
 app.post('/api/buenas_practicas', async (req, res) => {
   const {
@@ -102,7 +102,7 @@ app.post('/api/buenas_practicas', async (req, res) => {
 
 
     // Envía correo de confirmación
-    const mailOptions = {
+    /*const mailOptions = {
       from: process.env.GMAIL_USER,
       to: correo_electronico,
       subject: '¡Hurra! Hemos recibido tu buena práctica de salvaguardia 🎉',
@@ -118,7 +118,7 @@ app.post('/api/buenas_practicas', async (req, res) => {
   ¡Gracias por ser parte activa de la salvaguardia de la cultura silletera!`
     };
 
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);*/
 
     res.status(200).send('Formulario enviado y correo de confirmación enviado.');
   } catch (err) {
